@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bec5a050gnbgy"]
 
 [ext_resource type="Texture2D" uid="uid://cdj3rclkcxybk" path="res://assets/sprites/flag.png" id="1_ocwkb"]
-[ext_resource type="Script" path="res://scenes/endmarker.gd" id="1_olajl"]
+[ext_resource type="Script" path="res://scripts/endmarker.gd" id="1_olajl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lhy41"]
 atlas = ExtResource("1_ocwkb")
@@ -49,8 +49,7 @@ script = ExtResource("1_olajl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t0u1l")
 autoplay = "default"
-frame = 2
-frame_progress = 0.27689
+frame_progress = 0.664601
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)

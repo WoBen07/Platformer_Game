@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn3yr7t4vocmm"]
+[gd_scene load_steps=9 format=3 uid="uid://bn3yr7t4vocmm"]
 
 [ext_resource type="PackedScene" uid="uid://ckurrpdg7nb2w" path="res://scenes/player.tscn" id="1_pxk52"]
 [ext_resource type="Texture2D" uid="uid://bayq18dtklmq1" path="res://assets/sprites/world_tileset.png" id="2_ptv65"]
 [ext_resource type="PackedScene" uid="uid://w12iw88pcdx2" path="res://scenes/killzone.tscn" id="3_f8sj5"]
 [ext_resource type="PackedScene" uid="uid://cm4q7510hgnmv" path="res://scenes/slime.tscn" id="4_7uetj"]
 [ext_resource type="PackedScene" uid="uid://cggqa7n1fb3mw" path="res://scenes/platform.tscn" id="5_2nau4"]
-[ext_resource type="PackedScene" uid="uid://bec5a050gnbgy" path="res://scenes/endmarker.tscn" id="6_dmhsp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2ehd"]
 texture = ExtResource("2_ptv65")
@@ -176,7 +175,7 @@ sources/0 = SubResource("TileSetAtlasSource_f2ehd")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ncb4t"]
 distance = -104.0
 
-[node name="Level_2" type="Node2D"]
+[node name="Level_2" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_pxk52")]
 z_index = 5
@@ -207,6 +206,3 @@ position = Vector2(114, 34)
 
 [node name="Platform" parent="." instance=ExtResource("5_2nau4")]
 position = Vector2(338, 20)
-
-[node name="AnimatableBody2D" parent="." instance=ExtResource("6_dmhsp")]
-position = Vector2(88, -124)

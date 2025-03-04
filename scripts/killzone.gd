@@ -12,5 +12,5 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_timer_timeout() -> void:
-	get_tree().reload_current_scene()
 	Engine.time_scale = 1.0
+	LevelManager.call_deferred("instantiate_level", LevelManager.current_level - 1)

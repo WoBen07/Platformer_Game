@@ -178,6 +178,21 @@ sources/0 = SubResource("TileSetAtlasSource_6ols7")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ff5pb"]
 distance = -104.0
 
+[sub_resource type="Animation" id="Animation_dlc3n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(457, 5)]
+}
+
 [sub_resource type="Animation" id="Animation_u7m8i"]
 resource_name = "move"
 length = 1.5
@@ -193,21 +208,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(457, 5), Vector2(538, 5)]
-}
-
-[sub_resource type="Animation" id="Animation_dlc3n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(457, 5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j20tb"]
@@ -282,9 +282,6 @@ autoplay = "move"
 [node name="AnimatableBody2D" parent="Platforms" instance=ExtResource("6_85byq")]
 position = Vector2(620, -16)
 
-[node name="AnimatableBody2D2" parent="Platforms" instance=ExtResource("6_85byq")]
-position = Vector2(-69, -30)
-
 [node name="Labels" type="Node" parent="."]
 
 [node name="Label" type="Label" parent="Labels"]
@@ -339,3 +336,6 @@ position = Vector2(82, 21)
 
 [node name="Slime3" parent="Slimes" instance=ExtResource("7_i8wfh")]
 position = Vector2(146, -43)
+
+[node name="Endmarker" parent="." instance=ExtResource("6_85byq")]
+position = Vector2(-69, -30)

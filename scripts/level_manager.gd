@@ -1,49 +1,53 @@
 extends Node
 
-
-
-
 var levels = [
-	"res://scenes/level_1.tscn",
-	"res://scenes/level_2.tscn"
+	preload("res://scenes/level_1.tscn"),
+	preload("res://scenes/level_2.tscn")
 ]
 
+var is_loading = false
 var current_level = 0
-var current_scene = null
-@onready var game_node = get_node("/root/Game")  # Ensure we reference the Game node
+@onready var game = get_tree().root.get_child(0)
 
 func _ready():
-	await get_tree().process_frame  # Wait a frame to ensure Game scene is ready
-	load_level()
+	print("LevelManager Ready")  # Debugging Line
+	instantiate_level(0)
+ # Ensures the first level is loaded only once
 
-func load_level():
-	call_deferred("_deferred_load_level")  # Call deferred function
+func instantiate_level(level_index):
+	if level_index < 0 or level_index >= levels.size():
+		print("Invalid level index:", level_index)
+		return
+	
+	if is_loading:
+		print("Already loading a level, skipping request.")
+		return
+	
+	print("Instantiating Level:", level_index)
+	is_loading = true
+	
+	# Remove previous level if exists
+	if game.get_child_count() > 0:
+		var previous_level = game.get_child(game.get_child_count() - 1)
+		game.remove_child(previous_level)
+		previous_level.queue_free()
+		await get_tree().process_frame  # Ensure it's fully removed
+	
+	# Instantiate and add the new level
+	var level_instance = levels[level_index].instantiate()
+	game.add_child(level_instance)
 
-func _deferred_load_level():
-	if current_scene:
-		current_scene.queue_free()  # Remove old level
-
-	var level = load(levels[current_level]).instantiate()
-	game_node.add_child(level)
-	current_scene = level  # Store reference to the new level
-
-var level_changing = false  # Prevents multiple calls
-
+	print("Level Loaded:", level_index)
+	current_level += 1
+	is_loading = false
+	
 func next_level():
-	if level_changing:  
-		return  # Stop if already transitioning
+	if is_loading:
+		print("Game is still loading, skipping level change.")
+		return
 
-	level_changing = true  # Mark as transitioning
+	if current_level >= levels.size():
+		print("Game finished")
+		return
 
-	print("Current level index:", current_level)
-	print("Total levels:", levels.size())
-
-	if current_level < levels.size():
-		current_level += 1
-		load_level()
-	else:
-		print("Game completed! No more levels.")
-		#get_tree().change_scene_to_file("res://EndScreen.tscn")
-
-	await get_tree().process_frame  # Wait one frame
-	level_changing = false  # Reset after transition
+	instantiate_level(current_level)
