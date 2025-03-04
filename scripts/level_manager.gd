@@ -14,6 +14,10 @@ func _ready():
 	instantiate_level(0)
  # Ensures the first level is loaded only once
 
+func reload_current_level():
+	instantiate_level(current_level)
+	
+	
 func instantiate_level(level_index):
 	if level_index < 0 or level_index >= levels.size():
 		print("Invalid level index:", level_index)
@@ -38,10 +42,11 @@ func instantiate_level(level_index):
 	game.add_child(level_instance)
 
 	print("Level Loaded:", level_index)
-	current_level += 1
+	
 	is_loading = false
 	
 func next_level():
+	current_level += 1
 	if is_loading:
 		print("Game is still loading, skipping level change.")
 		return
@@ -49,5 +54,6 @@ func next_level():
 	if current_level >= levels.size():
 		print("Game finished")
 		return
-
+	
 	instantiate_level(current_level)
+	

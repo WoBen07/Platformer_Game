@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cna8radn3f7pd"]
+
+[node name="Endscreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 175.0
+offset_bottom = 87.0
+
+[node name="Game_Over" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 119.0
+offset_bottom = 23.0
+text = "Game Over"
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(-30, -10)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 23.0
+offset_right = 100.0
+offset_bottom = 54.0
+text = "Main Menu"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 154.0
+offset_bottom = 70.0

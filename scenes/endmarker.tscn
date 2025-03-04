@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bec5a050gnbgy"]
+[gd_scene load_steps=15 format=3 uid="uid://bec5a050gnbgy"]
 
 [ext_resource type="Texture2D" uid="uid://cdj3rclkcxybk" path="res://assets/sprites/flag.png" id="1_ocwkb"]
 [ext_resource type="Script" path="res://scripts/endmarker.gd" id="1_olajl"]
+[ext_resource type="Texture2D" uid="uid://dx2ri2p6cvvfq" path="res://assets/sprites/finish.png" id="3_4aktw"]
+[ext_resource type="AudioStream" uid="uid://drr3nd4hgbuqd" path="res://assets/sounds/finish_game.wav" id="4_rvbko"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lhy41"]
 atlas = ExtResource("1_ocwkb")
@@ -17,6 +19,22 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2be0w"]
 atlas = ExtResource("1_ocwkb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5j8h"]
+atlas = ExtResource("3_4aktw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6fga"]
+atlas = ExtResource("3_4aktw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcju0"]
+atlas = ExtResource("3_4aktw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0uht"]
+atlas = ExtResource("3_4aktw")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t0u1l"]
@@ -37,22 +55,42 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5j8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6fga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcju0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0uht")
+}],
+"loop": false,
+"name": &"finish",
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3epis"]
 radius = 14.3178
 
-[node name="Area2D" type="Area2D"]
+[node name="Endmarker" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_olajl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t0u1l")
+animation = &"finish"
 autoplay = "default"
-frame_progress = 0.664601
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_3epis")
+
+[node name="Finish" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rvbko")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
