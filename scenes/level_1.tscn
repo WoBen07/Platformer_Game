@@ -323,6 +323,14 @@ theme_override_font_sizes/font_size = 8
 text = "Coin = Good
 "
 
+[node name="Label5" type="Label" parent="Labels"]
+offset_left = -176.0
+offset_top = -70.0
+offset_right = -136.0
+offset_bottom = -47.0
+theme_override_fonts/font = ExtResource("6_qe40o")
+text = "Level 1"
+
 [node name="Slimes" type="Node" parent="."]
 
 [node name="Slime" parent="Slimes" instance=ExtResource("7_i8wfh")]
@@ -336,3 +344,6 @@ position = Vector2(146, -43)
 
 [node name="Area2D" parent="." instance=ExtResource("6_85byq")]
 position = Vector2(618, -16)
+
+[node name="Endmarker" parent="." instance=ExtResource("6_85byq")]
+position = Vector2(-78, -31)

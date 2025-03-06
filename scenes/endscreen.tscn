@@ -1,28 +1,61 @@
-[gd_scene format=3 uid="uid://cna8radn3f7pd"]
+[gd_scene load_steps=4 format=3 uid="uid://cna8radn3f7pd"]
+
+[ext_resource type="Texture2D" uid="uid://m7hxi1rls1at" path="res://assets/images/endscreen_background.jpg" id="1_522fc"]
+[ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="1_hk3wn"]
+[ext_resource type="Script" path="res://scripts/endscreen.gd" id="1_jf2mh"]
 
 [node name="Endscreen" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 175.0
-offset_bottom = 87.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jf2mh")
 
-[node name="Game_Over" type="Label" parent="."]
-layout_mode = 0
-offset_left = 32.0
-offset_right = 119.0
-offset_bottom = 23.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_522fc")
+expand_mode = 2
+
+[node name="Game_Over" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -581.0
+offset_top = 117.0
+offset_right = 582.0
+offset_bottom = 268.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_hk3wn")
+theme_override_font_sizes/font_size = 150
 text = "Game Over"
 
-[node name="Button" type="Button" parent="."]
+[node name="Main_menu" type="Button" parent="CanvasLayer"]
 custom_minimum_size = Vector2(-30, -10)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 23.0
-offset_right = 100.0
-offset_bottom = 54.0
+offset_left = 248.0
+offset_top = 600.0
+offset_right = 837.0
+offset_bottom = 684.0
+theme_override_fonts/font = ExtResource("1_hk3wn")
+theme_override_font_sizes/font_size = 75
 text = "Main Menu"
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 154.0
-offset_bottom = 70.0
+[node name="Restart" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(-30, -10)
+offset_left = 1029.0
+offset_top = 603.0
+offset_right = 1618.0
+offset_bottom = 687.0
+theme_override_fonts/font = ExtResource("1_hk3wn")
+theme_override_font_sizes/font_size = 75
+text = "Restart"

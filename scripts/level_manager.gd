@@ -5,15 +5,29 @@ var levels = [
 	preload("res://scenes/level_2.tscn")
 ]
 
+var endscreen = preload("res://scenes/endscreen.tscn")
+var main_menu = preload("res://scenes/main_menue.tscn")
+
 var is_loading = false
 var current_level = 0
 @onready var game = get_tree().root.get_child(0)
 
 func _ready():
 	print("LevelManager Ready")  # Debugging Line
-	instantiate_level(0)
+	#var main_menue_instance = main_menu.instantiate()
+	#game.add_child(main_menue_instance)
+	load_main_menue()
  # Ensures the first level is loaded only once
 
+func load_main_menue():
+	if game.get_child_count() > 0:
+		var previous_level = game.get_child(game.get_child_count() - 1)
+		game.remove_child(previous_level)
+		previous_level.queue_free()
+		await get_tree().process_frame
+	var main_menue_instance = main_menu.instantiate()
+	game.add_child(main_menue_instance)
+	
 func reload_current_level():
 	instantiate_level(current_level)
 	
@@ -53,7 +67,13 @@ func next_level():
 
 	if current_level >= levels.size():
 		print("Game finished")
-		return
+		if game.get_child_count() > 0:
+			var previous_level = game.get_child(game.get_child_count() - 1)
+			game.remove_child(previous_level)
+			previous_level.queue_free()
+			await get_tree().process_frame
+		var endscreen_instance = endscreen.instantiate()
+		game.add_child(endscreen_instance)
 	
 	instantiate_level(current_level)
 	

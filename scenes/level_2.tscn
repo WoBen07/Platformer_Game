@@ -177,6 +177,21 @@ sources/0 = SubResource("TileSetAtlasSource_f2ehd")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ncb4t"]
 distance = -104.0
 
+[sub_resource type="Animation" id="Animation_emys0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(313, 20)]
+}
+
 [sub_resource type="Animation" id="Animation_0wif5"]
 resource_name = "move"
 length = 3.0
@@ -194,7 +209,13 @@ tracks/0/keys = {
 "values": [Vector2(313, 20), Vector2(364, 20)]
 }
 
-[sub_resource type="Animation" id="Animation_emys0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bgvik"]
+_data = {
+"RESET": SubResource("Animation_emys0"),
+"move": SubResource("Animation_0wif5")
+}
+
+[sub_resource type="Animation" id="Animation_terxu"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -206,13 +227,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(313, 20)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bgvik"]
-_data = {
-"RESET": SubResource("Animation_emys0"),
-"move": SubResource("Animation_0wif5")
+"values": [Vector2(410, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_ot81i"]
@@ -232,7 +247,13 @@ tracks/0/keys = {
 "values": [Vector2(410, 20), Vector2(459, 20)]
 }
 
-[sub_resource type="Animation" id="Animation_terxu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smr5t"]
+_data = {
+"RESET": SubResource("Animation_terxu"),
+"move": SubResource("Animation_ot81i")
+}
+
+[sub_resource type="Animation" id="Animation_fabvk"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -244,13 +265,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(410, 20)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_smr5t"]
-_data = {
-"RESET": SubResource("Animation_terxu"),
-"move": SubResource("Animation_ot81i")
+"values": [Vector2(200, -13)]
 }
 
 [sub_resource type="Animation" id="Animation_tq35e"]
@@ -268,21 +283,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(200, -13), Vector2(204, -108)]
-}
-
-[sub_resource type="Animation" id="Animation_fabvk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(200, -13)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ikow"]
@@ -329,6 +329,9 @@ position = Vector2(113, 36)
 
 [node name="Slime2" parent="Slimes" instance=ExtResource("4_7uetj")]
 position = Vector2(435, -43)
+
+[node name="Endmarker" parent="Slimes" instance=ExtResource("6_dmhsp")]
+position = Vector2(27, 0)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -140.0
