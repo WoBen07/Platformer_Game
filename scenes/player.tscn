@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://ckurrpdg7nb2w"]
+[gd_scene load_steps=52 format=3 uid="uid://ckurrpdg7nb2w"]
 
 [ext_resource type="Texture2D" uid="uid://fbhj5ugitunn" path="res://assets/sprites/knight.png" id="1_8a5vn"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_se5k5"]
 [ext_resource type="AudioStream" uid="uid://bty5e3062o63h" path="res://assets/sounds/die.wav" id="3_vfgvg"]
+[ext_resource type="Texture2D" uid="uid://bn32xgww70aai" path="res://assets/sprites/heart.png" id="4_vknht"]
+[ext_resource type="AudioStream" uid="uid://diswj2bhlyonq" path="res://assets/sounds/hit.wav" id="5_iiuas"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hu8t3"]
 atlas = ExtResource("1_8a5vn")
@@ -154,7 +156,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 20.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -238,6 +240,114 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vqhqv"]
 radius = 5.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm6b7"]
+atlas = ExtResource("4_vknht")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpko2"]
+atlas = ExtResource("4_vknht")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_meo32"]
+atlas = ExtResource("4_vknht")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl44u"]
+atlas = ExtResource("4_vknht")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5vh6b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm6b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpko2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_meo32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl44u")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv2lu"]
+atlas = ExtResource("4_vknht")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_871j0"]
+atlas = ExtResource("4_vknht")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4akp"]
+atlas = ExtResource("4_vknht")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbv7e"]
+atlas = ExtResource("4_vknht")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7aa3b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv2lu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_871j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4akp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbv7e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd8g7"]
+atlas = ExtResource("4_vknht")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj5li"]
+atlas = ExtResource("4_vknht")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cb70"]
+atlas = ExtResource("4_vknht")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gv1v"]
+atlas = ExtResource("4_vknht")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0w3aa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd8g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj5li")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cb70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gv1v")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_se5k5")
@@ -245,12 +355,40 @@ script = ExtResource("1_se5k5")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_ncux4")
-animation = &"die"
+animation = &"hit"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_vqhqv")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_vfgvg")
+
+[node name="HeartContainer" type="Node2D" parent="."]
+position = Vector2(0, -26)
+
+[node name="Heart1" type="AnimatedSprite2D" parent="HeartContainer"]
+position = Vector2(-7, 3)
+scale = Vector2(0.639999, 0.72)
+sprite_frames = SubResource("SpriteFrames_5vh6b")
+
+[node name="Heart2" type="AnimatedSprite2D" parent="HeartContainer"]
+position = Vector2(1, -1)
+scale = Vector2(0.600001, 0.64)
+sprite_frames = SubResource("SpriteFrames_7aa3b")
+
+[node name="Heart3" type="AnimatedSprite2D" parent="HeartContainer"]
+position = Vector2(9, 3)
+scale = Vector2(0.679999, 0.68)
+sprite_frames = SubResource("SpriteFrames_0w3aa")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_iiuas")
+
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

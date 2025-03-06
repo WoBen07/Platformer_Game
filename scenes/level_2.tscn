@@ -330,9 +330,6 @@ position = Vector2(113, 36)
 [node name="Slime2" parent="Slimes" instance=ExtResource("4_7uetj")]
 position = Vector2(435, -43)
 
-[node name="Endmarker" parent="Slimes" instance=ExtResource("6_dmhsp")]
-position = Vector2(27, 0)
-
 [node name="Label" type="Label" parent="."]
 offset_left = -140.0
 offset_top = -52.0
@@ -372,3 +369,6 @@ libraries = {
 "": SubResource("AnimationLibrary_5ikow")
 }
 autoplay = "move"
+
+[node name="Endmarker" parent="." instance=ExtResource("6_dmhsp")]
+position = Vector2(27, 1)

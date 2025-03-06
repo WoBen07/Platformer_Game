@@ -8,8 +8,11 @@ var levels = [
 var endscreen = preload("res://scenes/endscreen.tscn")
 var main_menu = preload("res://scenes/main_menue.tscn")
 
+
 var is_loading = false
 var current_level = 0
+var collected_coins = 0
+var deaths = 0
 @onready var game = get_tree().root.get_child(0)
 
 func _ready():
@@ -20,13 +23,33 @@ func _ready():
  # Ensures the first level is loaded only once
 
 func load_main_menue():
-	if game.get_child_count() > 0:
-		var previous_level = game.get_child(game.get_child_count() - 1)
-		game.remove_child(previous_level)
-		previous_level.queue_free()
-		await get_tree().process_frame
+	# Ensure current_level is reset
+	current_level = 0  
+	deaths = 0
+	collected_coins = 0
+	# Remove all children EXCEPT the main menu
+	for child in game.get_children():
+		if child != main_menu:  # Keep main menu
+			game.remove_child(child)
+			child.queue_free()
+	
+		await get_tree().process_frame  # Ensure cleanup happens properly
+	
+	# Load and add main menu if it's not already there
 	var main_menue_instance = main_menu.instantiate()
 	game.add_child(main_menue_instance)
+	
+func load_restart_menu():
+	
+	for child in game.get_children():
+		if child != endscreen:
+			game.remove_child(child)
+			child.queue_free()
+		await  get_tree().process_frame
+		
+	var endscreen_instance = endscreen.instantiate()
+	
+	game.add_child(endscreen_instance)
 	
 func reload_current_level():
 	instantiate_level(current_level)
@@ -45,11 +68,11 @@ func instantiate_level(level_index):
 	is_loading = true
 	
 	# Remove previous level if exists
-	if game.get_child_count() > 0:
-		var previous_level = game.get_child(game.get_child_count() - 1)
-		game.remove_child(previous_level)
-		previous_level.queue_free()
-		await get_tree().process_frame  # Ensure it's fully removed
+	for child in game.get_children():
+		if child != levels[level_index]:
+			game.remove_child(child)
+			child.queue_free()
+		await  get_tree().process_frame
 	
 	# Instantiate and add the new level
 	var level_instance = levels[level_index].instantiate()
@@ -67,13 +90,8 @@ func next_level():
 
 	if current_level >= levels.size():
 		print("Game finished")
-		if game.get_child_count() > 0:
-			var previous_level = game.get_child(game.get_child_count() - 1)
-			game.remove_child(previous_level)
-			previous_level.queue_free()
-			await get_tree().process_frame
-		var endscreen_instance = endscreen.instantiate()
-		game.add_child(endscreen_instance)
+		current_level -= 1
+		load_restart_menu()
 	
 	instantiate_level(current_level)
 	
