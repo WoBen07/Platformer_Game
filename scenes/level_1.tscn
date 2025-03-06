@@ -344,6 +344,3 @@ position = Vector2(146, -43)
 
 [node name="Area2D" parent="." instance=ExtResource("6_85byq")]
 position = Vector2(618, -16)
-
-[node name="Endmarker" parent="." instance=ExtResource("6_85byq")]
-position = Vector2(-78, -31)

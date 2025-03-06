@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cna8radn3f7pd"]
 
-[ext_resource type="Texture2D" uid="uid://m7hxi1rls1at" path="res://assets/images/endscreen_background.jpg" id="1_522fc"]
 [ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="1_hk3wn"]
 [ext_resource type="Script" path="res://scripts/endscreen.gd" id="1_jf2mh"]
+[ext_resource type="Texture2D" uid="uid://fkxmii8ih8q3" path="res://assets/images/endscreen_back_2.jpg" id="2_f7qku"]
 
 [node name="Endscreen" type="Control"]
 layout_mode = 3
@@ -21,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_522fc")
+texture = ExtResource("2_f7qku")
 expand_mode = 2
 
 [node name="Game_Over" type="Label" parent="CanvasLayer"]
@@ -33,9 +33,6 @@ offset_top = 117.0
 offset_right = 582.0
 offset_bottom = 268.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_hk3wn")
 theme_override_font_sizes/font_size = 150
 text = "Game Over"
@@ -65,7 +62,6 @@ offset_left = 219.0
 offset_top = 812.0
 offset_right = 1688.0
 offset_bottom = 863.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_hk3wn")
 theme_override_font_sizes/font_size = 50
 text = "You died X times and collected X Coins"
