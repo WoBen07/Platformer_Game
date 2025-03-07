@@ -4,7 +4,8 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-	LevelManager.load_restart_menu()
+	if body.has_method("respawn"):
+		body.respawn()
 		
 	
 

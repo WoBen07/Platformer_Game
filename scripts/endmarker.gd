@@ -10,7 +10,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return  # Ignore extra triggers
 	has_triggered = true
 	print("Body entered:", body.name)
-	
+	if body.has_method("reached_end"):
+		body.reached_end()
 	animated_sprite.play("finish")
 	finish.play()
 	 # Wait for both animation and sound to finish before moving to next level

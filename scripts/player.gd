@@ -1,22 +1,22 @@
 extends CharacterBody2D
 
-
-const SPEED = 130.0
-const JUMP_VELOCITY = -300.0
 @onready var animated_sprite: AnimatedSprite2D = $Sprite
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var audio_stream_player: AudioStreamPlayer2D = $Die
 @onready var hit: AudioStreamPlayer2D = $Hit
-
+@onready var heart_1: AnimatedSprite2D = $HeartContainer/Heart1
+@onready var heart_2: AnimatedSprite2D = $HeartContainer/Heart2
+@onready var heart_3: AnimatedSprite2D = $HeartContainer/Heart3
+@onready var heart_container: Node2D = $HeartContainer
+@onready var spawn_point = global_position
 
 var is_dead = false
 var is_loading_next_level = false
 var lives = 3
 var is_invincable = false
-@onready var heart_1: AnimatedSprite2D = $HeartContainer/Heart1
-@onready var heart_2: AnimatedSprite2D = $HeartContainer/Heart2
-@onready var heart_3: AnimatedSprite2D = $HeartContainer/Heart3
-@onready var heart_container: Node2D = $HeartContainer
+const SPEED = 130.0
+const JUMP_VELOCITY = -300.0
+var controls_disabled = false
 
 func _ready():
 	var tween = get_tree().create_tween()
@@ -25,18 +25,20 @@ func _ready():
 	tween.tween_property(heart_container, "position:y", heart_container.position.y + 1.5, 0.5).set_trans(Tween.TRANS_SINE)
 	add_to_group("player")
 
-
-func player_is_hit():
-	Engine.time_scale = 0.5
-	if is_dead or is_invincable:  
-		return  
-	is_invincable = true
-	lives -= 1
+func respawn():
+	if lives > 0:
+		lives -= 1
+		global_position = spawn_point
+		update_lives()
+		make_invincable()
+	else:
+		player_die()
+		
+func update_lives():
 	if lives == 2:
 		heart_1.play()
 		hit.play()
 		animated_sprite.play("hit")
-		
 	elif lives == 1:
 		heart_2.play()
 		hit.play()
@@ -48,9 +50,20 @@ func player_is_hit():
 		LevelManager.deaths += 1
 		Engine.time_scale = 1.0
 		return
+		
+func make_invincable():
+	animated_sprite.modulate = Color(1, 1, 1, 0.5)  # Make semi-transparent
+	$InvincibilityTimer.start()
+
+func player_is_hit():
+	Engine.time_scale = 0.5
+	if is_dead or is_invincable:  
+		return  
+	is_invincable = true
+	lives -= 1
+	update_lives()
 	if is_invincable:
-		animated_sprite.modulate = Color(1, 1, 1, 0.5)  # Make semi-transparent
-		$InvincibilityTimer.start()
+		make_invincable()
 		
 func _on_invincibility_timer_timeout():
 	# Re-enable collision after invincibility ends
@@ -58,8 +71,17 @@ func _on_invincibility_timer_timeout():
 	Engine.time_scale = 1.0
 	animated_sprite.modulate = Color(1, 1, 1, 1)  # Restore normal appearance
 
-
+func reached_end():
+	if controls_disabled:
+		return  
+	controls_disabled = true  
+	heart_container.visible = false
+	velocity.x = 0  # Stop horizontal movement
+	animated_sprite.play("finish")
 	
+	await get_tree().create_timer(3.0).timeout  # Wait a second
+	controls_disabled = false  # Re-enable movement (if needed)
+	heart_container.visible = true
 
 func player_die():
 		if is_dead:
@@ -77,12 +99,6 @@ func player_die():
 
 		# Wait for the sound to finish (optional, if it's longer than the animation)
 		await audio_stream_player.finished
-
-		# Remove collision shape
-		
-
-		# Load the restart menu AFTER animation and sound are done
-		
 		Engine.time_scale = 1.0
 		LevelManager.load_restart_menu()
 	
@@ -98,6 +114,10 @@ func _physics_process(delta: float) -> void:
 		
 	if animated_sprite.animation == "hit" and not animated_sprite.frame == animated_sprite.sprite_frames.get_frame_count("hit") - 1:
 		return  # Wait until hit animation is finished
+	
+	if controls_disabled:
+		move_and_slide()
+		return
 		
 	if not is_on_floor():
 		velocity += get_gravity() * delta
