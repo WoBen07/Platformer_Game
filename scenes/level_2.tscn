@@ -348,7 +348,7 @@ position = Vector2(313, 20)
 libraries = {
 "": SubResource("AnimationLibrary_bgvik")
 }
-autoplay = "RESET"
+autoplay = "move"
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("5_2nau4")]
 position = Vector2(410, 20)
