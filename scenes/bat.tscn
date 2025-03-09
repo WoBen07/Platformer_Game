@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://b4s5oy2p4n4yl"]
+
+[ext_resource type="Script" path="res://scripts/bat.gd" id="1_1s4xp"]
+[ext_resource type="Texture2D" uid="uid://bwcpf453dkt3i" path="res://assets/sprites/piskel_bat.png" id="2_qt8dl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8qts"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rfqx"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejm7e"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6ytf"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmqy7"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqqy5"]
+atlas = ExtResource("2_qt8dl")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7bjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8qts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rfqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejm7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6ytf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmqy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqqy5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_r5176"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 0, 5, 0, 10, 0, 20, 0, 5, 0, 0, 0, 0, 0, 20, 0)
+}
+point_count = 3
+
+[node name="Bat" type="Node2D"]
+script = ExtResource("1_1s4xp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v7bjd")
+frame_progress = 0.525183
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_r5176")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(4.78348, 0)
+rotation = 1.5708
