@@ -7,11 +7,12 @@ var levels = [
 
 var endscreen = preload("res://scenes/endscreen.tscn")
 var main_menu = preload("res://scenes/main_menue.tscn")
-
+const UI_OVERLAY = preload("res://scenes/ui_overlay.tscn")
 
 var is_loading = false
 var current_level = 0
 var collected_coins = 0
+var coin_checkpoint = 0
 var deaths = 0
 @onready var game = get_tree().root.get_child(0)
 
@@ -27,6 +28,7 @@ func load_main_menue():
 	current_level = 0  
 	deaths = 0
 	collected_coins = 0
+	coin_checkpoint = 0
 	# Remove all children EXCEPT the main menu
 	for child in game.get_children():
 		if child != main_menu:  # Keep main menu
@@ -40,7 +42,7 @@ func load_main_menue():
 	game.add_child(main_menue_instance)
 	
 func load_restart_menu():
-	
+	collected_coins = coin_checkpoint
 	for child in game.get_children():
 		if child != endscreen:
 			game.remove_child(child)
@@ -56,6 +58,7 @@ func reload_current_level():
 	
 	
 func instantiate_level(level_index):
+	coin_checkpoint = collected_coins
 	if level_index < 0 or level_index >= levels.size():
 		print("Invalid level index:", level_index)
 		return
@@ -77,7 +80,16 @@ func instantiate_level(level_index):
 	# Instantiate and add the new level
 	var level_instance = levels[level_index].instantiate()
 	game.add_child(level_instance)
-
+	
+	var player_instance = level_instance.get_node("./Player") 
+	print("Player instance", player_instance) # Adjust the path if needed
+	Globals.player = player_instance
+	
+	var ui_overlay_instance = UI_OVERLAY.instantiate()
+	game.add_child(ui_overlay_instance)
+	
+	  # Set the player reference in the global singleton
+	print("Added UI")
 	print("Level Loaded:", level_index)
 	
 	is_loading = false

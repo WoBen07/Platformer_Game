@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://daproefgxreo8"]
+[gd_scene load_steps=18 format=4 uid="uid://daproefgxreo8"]
 
 [ext_resource type="PackedScene" uid="uid://ckurrpdg7nb2w" path="res://scenes/player.tscn" id="1_hee2x"]
+[ext_resource type="Texture2D" uid="uid://dt88g3xmo0smp" path="res://assets/images/clouds.jpg" id="1_oaxba"]
 [ext_resource type="Texture2D" uid="uid://bayq18dtklmq1" path="res://assets/sprites/world_tileset.png" id="2_l0ji8"]
 [ext_resource type="PackedScene" uid="uid://w12iw88pcdx2" path="res://scenes/killzone.tscn" id="3_nprf1"]
 [ext_resource type="PackedScene" uid="uid://du6w2r68sicpw" path="res://scenes/coin.tscn" id="4_m7oa0"]
@@ -10,7 +11,47 @@
 [ext_resource type="PackedScene" uid="uid://cm4q7510hgnmv" path="res://scenes/slime.tscn" id="7_i8wfh"]
 [ext_resource type="AudioStream" uid="uid://cvg8y168rerqa" path="res://assets/music/forest_back.mp3" id="9_d2jqq"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="10_k2ki6"]
-[ext_resource type="Texture2D" uid="uid://qmk0v6pbyie3" path="res://assets/images/forest_background.jpg" id="11_frtls"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ff5pb"]
+distance = -104.0
+
+[sub_resource type="Animation" id="Animation_dlc3n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(457, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_u7m8i"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.46667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(457, 5), Vector2(538, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j20tb"]
+_data = {
+"RESET": SubResource("Animation_dlc3n"),
+"move": SubResource("Animation_u7m8i")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ols7"]
 texture = ExtResource("2_l0ji8")
@@ -178,48 +219,22 @@ texture = ExtResource("2_l0ji8")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_6ols7")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ff5pb"]
-distance = -104.0
+[node name="Level_1" type="Node2D"]
+texture_repeat = 3
 
-[sub_resource type="Animation" id="Animation_dlc3n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(457, 5)]
-}
-
-[sub_resource type="Animation" id="Animation_u7m8i"]
-resource_name = "move"
-length = 1.5
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.46667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(457, 5), Vector2(538, 5)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j20tb"]
-_data = {
-"RESET": SubResource("Animation_dlc3n"),
-"move": SubResource("Animation_u7m8i")
-}
-
-[node name="Level_1" type="Node"]
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -389.0
+offset_top = -434.0
+offset_right = 1111.0
+offset_bottom = 566.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_oaxba")
+expand_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_hee2x")]
 z_index = 5
@@ -230,14 +245,10 @@ zoom = Vector2(4, 4)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
-
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2(10, 1)
-tile_set = SubResource("TileSet_exo47")
-format = 2
-layer_0/name = "Back"
-layer_1/name = "Mid"
-layer_1/tile_data = PackedInt32Array(131071, 0, 0, 65536, 0, 0, 196606, 0, 0, 196605, 0, 0, -5, 0, 0, -6, 0, 0, 196607, 0, 1, 131072, 0, 1, 196608, 0, 1, 262142, 0, 1, 262141, 0, 1, 262143, 0, 1, 262144, 0, 1, 327678, 0, 1, 327677, 0, 1, 327679, 0, 1, 65530, 0, 1, 65531, 0, 1, 131067, 0, 1, 196603, 0, 1, 196604, 0, 0, 262140, 0, 1, 262139, 0, 1, 262138, 0, 1, 196602, 0, 1, 131066, 0, 1, 327674, 0, 1, 327675, 0, 1, 327676, 0, 1, -196607, 0, 0, -262142, 0, 0, -262141, 0, 0, -196606, 0, 1, -196605, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 0, -131067, 0, 0, 131076, 0, 0, 131077, 0, 0, 131080, 0, 0, 131081, 0, 0, 196612, 0, 1, 196613, 0, 1, 262149, 0, 1, 262148, 0, 1, 196616, 0, 1, 196617, 0, 1, 262153, 0, 1, 262152, 0, 1, -196598, 0, 1, -131062, 0, 1, -131063, 0, 1, -196599, 0, 1, -131064, 0, 0, -262135, 0, 0, -262134, 0, 0, -131061, 0, 0, 131073, 589824, 0, 131078, 589824, 0, 131079, 720896, 0, 131075, 720896, 0, 131074, 655360, 0, 131068, 65536, 4, 65541, 65536, 8, 13, 0, 0, 14, 0, 0, 15, 0, 0, 65549, 0, 1, 65550, 0, 1, 131086, 0, 1, 131087, 0, 1, 196623, 0, 1, 262159, 0, 1, 262158, 0, 1, 196622, 0, 1, 196621, 0, 1, 131085, 0, 1, 262157, 0, 1, 65551, 0, 1, -65525, 0, 1, 11, 0, 1, 12, 0, 0, 65548, 0, 1, 131084, 0, 1, 16, 0, 0, 65552, 0, 1, 131088, 0, 1, 196624, 0, 1, -131066, 589824, 0, -131065, 720896, 0, 17, 589824, 1, 18, 655360, 1, 19, 655360, 1, 20, 655360, 1, 21, 655360, 1, 22, 655360, 1, 23, 720896, 1, 24, 0, 0, 25, 0, 0, 26, 0, 0, -262123, 0, 0, -262122, 0, 0, -196587, 0, 1, -196586, 0, 1, 65560, 0, 1, 65561, 0, 1, 65562, 0, 1, 131098, 0, 1, 196634, 0, 1, 131096, 0, 1, 131097, 0, 1, 196633, 0, 1, 196632, 0, 1, -196603, 0, 5, -262139, 0, 4, -327675, 0, 4, -393211, 0, 3, -65511, 0, 5, -131047, 0, 4, -196583, 0, 4, -327655, 0, 3, -327659, 65536, 4, -65522, 0, 8, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 65570, 0, 1, 65571, 0, 1, 65572, 0, 1, 65573, 0, 1, 65574, 0, 1, 131110, 0, 1, 196646, 0, 1, 196645, 0, 1, 196644, 0, 1, 196643, 0, 1, 196642, 0, 1, 131106, 0, 1, 131107, 0, 1, 131108, 0, 1, 131109, 0, 1, 38, 0, 0, -65499, 262144, 8, 65546, 0, 0, -262119, 0, 4, -327671, 65536, 4, -262143, 65536, 4)
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
 
 [node name="Killzone" parent="." instance=ExtResource("3_nprf1")]
 
@@ -292,6 +303,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_qe40o")
 theme_override_font_sizes/font_size = 8
 text = "Space to jump"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="Labels"]
 offset_left = 442.0
@@ -303,6 +315,7 @@ theme_override_fonts/font = ExtResource("6_qe40o")
 theme_override_font_sizes/font_size = 8
 text = "Falling hurts...
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="Labels"]
 offset_left = 35.0
@@ -313,6 +326,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_qe40o")
 theme_override_font_sizes/font_size = 8
 text = "Slime = Enemy = Bad"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="Labels"]
 offset_left = 129.0
@@ -324,6 +338,7 @@ theme_override_fonts/font = ExtResource("6_qe40o")
 theme_override_font_sizes/font_size = 8
 text = "Coin = Good
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="Label5" type="Label" parent="Labels"]
 offset_left = -176.0
@@ -332,6 +347,7 @@ offset_right = -136.0
 offset_bottom = -47.0
 theme_override_fonts/font = ExtResource("6_qe40o")
 text = "Level 1"
+metadata/_edit_use_anchors_ = true
 
 [node name="Slimes" type="Node" parent="."]
 
@@ -344,24 +360,25 @@ position = Vector2(82, 21)
 [node name="Slime3" parent="Slimes" instance=ExtResource("7_i8wfh")]
 position = Vector2(146, -43)
 
-[node name="Endmarker" parent="." instance=ExtResource("6_85byq")]
+[node name="Map" type="Node" parent="."]
+
+[node name="Endmarker" parent="Map" instance=ExtResource("6_85byq")]
 position = Vector2(618, -16)
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer2D" parent="Map"]
 stream = ExtResource("9_d2jqq")
 script = ExtResource("10_k2ki6")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
-z_index = -1000
-scale = Vector2(15, 15)
-scroll_offset = Vector2(-280, -227)
+[node name="Back" type="TileMapLayer" parent="Map"]
+use_parent_material = true
+position = Vector2(10, 1)
+tile_set = SubResource("TileSet_exo47")
 
-[node name="TextureRect" type="TextureRect" parent="Parallax2D"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("11_frtls")
-expand_mode = 1
-stretch_mode = 6
+[node name="Mid" type="TileMapLayer" parent="Map"]
+use_parent_material = true
+position = Vector2(10, 1)
+tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD7////AAAAAAAAAAD6////AAAAAAAAAAD//wIAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAD+/wMAAAAAAAEAAAD9/wMAAAAAAAEAAAD//wMAAAAAAAEAAAAAAAQAAAAAAAEAAAD+/wQAAAAAAAEAAAD9/wQAAAAAAAEAAAD//wQAAAAAAAEAAAD6/wAAAAAAAAEAAAD7/wAAAAAAAAEAAAD7/wEAAAAAAAEAAAD7/wIAAAAAAAEAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAEAAAD7/wMAAAAAAAEAAAD6/wMAAAAAAAEAAAD6/wIAAAAAAAEAAAD6/wEAAAAAAAEAAAD6/wQAAAAAAAEAAAD7/wQAAAAAAAEAAAD8/wQAAAAAAAEAAAABAP3/AAAAAAAAAAACAPz/AAAAAAAAAAADAPz/AAAAAAAAAAACAP3/AAAAAAEAAAADAP3/AAAAAAEAAAABAP7/AAAAAAEAAAACAP7/AAAAAAEAAAADAP7/AAAAAAEAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAEAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAFAAQAAAAAAAEAAAAEAAQAAAAAAAEAAAAIAAMAAAAAAAEAAAAJAAMAAAAAAAEAAAAJAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAKAP3/AAAAAAEAAAAKAP7/AAAAAAEAAAAJAP7/AAAAAAEAAAAJAP3/AAAAAAEAAAAIAP7/AAAAAAAAAAAJAPz/AAAAAAAAAAAKAPz/AAAAAAAAAAALAP7/AAAAAAAAAAABAAIAAAAJAAAAAAAGAAIAAAAJAAAAAAAHAAIAAAALAAAAAAADAAIAAAALAAAAAAACAAIAAAAKAAAAAAD8/wEAAAABAAQAAAAFAAEAAAABAAgAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAANAAEAAAAAAAEAAAAOAAEAAAAAAAEAAAAOAAIAAAAAAAEAAAAPAAIAAAAAAAEAAAAPAAMAAAAAAAEAAAAPAAQAAAAAAAEAAAAOAAQAAAAAAAEAAAAOAAMAAAAAAAEAAAANAAMAAAAAAAEAAAANAAIAAAAAAAEAAAANAAQAAAAAAAEAAAAPAAEAAAAAAAEAAAALAP//AAAAAAEAAAALAAAAAAAAAAEAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAEAAAAMAAIAAAAAAAEAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAEAAAAQAAIAAAAAAAEAAAAQAAMAAAAAAAEAAAAGAP7/AAAJAAAAAAAHAP7/AAALAAAAAAARAAAAAAAJAAEAAAASAAAAAAAKAAEAAAATAAAAAAAKAAEAAAAUAAAAAAAKAAEAAAAVAAAAAAAKAAEAAAAWAAAAAAAKAAEAAAAXAAAAAAALAAEAAAAYAAAAAAAAAAAAAAAZAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAVAPz/AAAAAAAAAAAWAPz/AAAAAAAAAAAVAP3/AAAAAAEAAAAWAP3/AAAAAAEAAAAYAAEAAAAAAAEAAAAZAAEAAAAAAAEAAAAaAAEAAAAAAAEAAAAaAAIAAAAAAAEAAAAaAAMAAAAAAAEAAAAYAAIAAAAAAAEAAAAZAAIAAAAAAAEAAAAZAAMAAAAAAAEAAAAYAAMAAAAAAAEAAAAFAP3/AAAAAAUAAAAFAPz/AAAAAAQAAAAFAPv/AAAAAAQAAAAFAPr/AAAAAAMAAAAZAP//AAAAAAUAAAAZAP7/AAAAAAQAAAAZAP3/AAAAAAQAAAAZAPv/AAAAAAMAAAAVAPv/AAABAAQAAAAOAP//AAAAAAgAAAAiAAAAAAAAAAAAAAAjAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAlAAAAAAAAAAAAAAAiAAEAAAAAAAEAAAAjAAEAAAAAAAEAAAAkAAEAAAAAAAEAAAAlAAEAAAAAAAEAAAAmAAEAAAAAAAEAAAAmAAIAAAAAAAEAAAAmAAMAAAAAAAEAAAAlAAMAAAAAAAEAAAAkAAMAAAAAAAEAAAAjAAMAAAAAAAEAAAAiAAMAAAAAAAEAAAAiAAIAAAAAAAEAAAAjAAIAAAAAAAEAAAAkAAIAAAAAAAEAAAAlAAIAAAAAAAEAAAAmAAAAAAAAAAAAAAAlAP//AAAEAAgAAAAKAAEAAAAAAAAAAAAZAPz/AAAAAAQAAAAJAPv/AAABAAQAAAABAPz/AAABAAQAAAA=")
+tile_set = SubResource("TileSet_exo47")
 
-[connection signal="tree_exited" from="Music" to="Music" method="_on_tree_exited"]
-[connection signal="tree_exiting" from="Music" to="Music" method="_on_tree_exiting"]
+[connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
+[connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]

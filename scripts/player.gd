@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal health_changed(lives)
+
 @onready var animated_sprite: AnimatedSprite2D = $Sprite
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var audio_stream_player: AudioStreamPlayer2D = $Die
@@ -36,15 +38,18 @@ func respawn():
 		
 func update_lives():
 	if lives == 2:
-		heart_1.play()
+		emit_signal("health_changed", lives)
+		#heart_1.play()
 		hit.play()
 		animated_sprite.play("hit")
 	elif lives == 1:
-		heart_2.play()
+		emit_signal("health_changed", lives)
+		#heart_2.play()
 		hit.play()
 		animated_sprite.play("hit")
 	else:
-		heart_3.play()
+		emit_signal("health_changed", lives)
+		#heart_3.play()
 		animated_sprite.play("hit")
 		player_die()
 		LevelManager.deaths += 1
