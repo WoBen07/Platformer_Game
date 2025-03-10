@@ -1,9 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://dshsb58bb81ev"]
+[gd_scene load_steps=42 format=3 uid="uid://dshsb58bb81ev"]
 
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="1_3xl2q"]
 [ext_resource type="Texture2D" uid="uid://bn32xgww70aai" path="res://assets/sprites/heart.png" id="1_dh0hy"]
 [ext_resource type="Texture2D" uid="uid://bk7g85gwiq8s7" path="res://assets/sprites/coin.png" id="3_nelsy"]
 [ext_resource type="FontFile" uid="uid://jm02oorscf6g" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_37w4s"]
+[ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="5_cgrhy"]
+[ext_resource type="Script" path="res://scripts/shop.gd" id="5_w5gvl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mm6b7"]
 atlas = ExtResource("1_dh0hy")
@@ -113,6 +115,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0devu"]
+atlas = ExtResource("1_dh0hy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bret6"]
+atlas = ExtResource("1_dh0hy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rbcw"]
+atlas = ExtResource("1_dh0hy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg4hn"]
+atlas = ExtResource("1_dh0hy")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmhik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0devu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bret6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rbcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg4hn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7wdb"]
 atlas = ExtResource("3_nelsy")
 region = Rect2(0, 0, 16, 16)
@@ -205,6 +243,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_qvw3p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qjv7i"]
+gradient = SubResource("Gradient_qvw3p")
+
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
@@ -233,14 +277,20 @@ position = Vector2(150, 0)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_acb71")
 
+[node name="Heart4" type="AnimatedSprite2D" parent="Control/HeartContainer"]
+visible = false
+position = Vector2(300, 0)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_cmhik")
+
 [node name="Coin" type="AnimatedSprite2D" parent="Control"]
 position = Vector2(1671, 80)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_yr5n7")
 autoplay = "default"
-frame_progress = 0.104108
+frame_progress = 0.508138
 
-[node name="Label" type="Label" parent="Control"]
+[node name="coins_bank" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = 1741.0
 offset_top = 41.0
@@ -249,4 +299,89 @@ offset_bottom = 64.0
 scale = Vector2(5, 5)
 theme_override_fonts/font = ExtResource("4_37w4s")
 text = "X
+"
+
+[node name="coins_add" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1747.0
+offset_top = 144.0
+offset_right = 1787.0
+offset_bottom = 167.0
+scale = Vector2(2.94918, 2.66993)
+theme_override_fonts/font = ExtResource("4_37w4s")
+text = "+ X"
+
+[node name="Container" type="Container" parent="."]
+offset_left = 39.0
+offset_top = 31.0
+offset_right = 79.0
+offset_bottom = 71.0
+script = ExtResource("5_w5gvl")
+
+[node name="Button" type="Button" parent="Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Shop"
+
+[node name="Shop" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Shop"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qjv7i")
+
+[node name="Close" type="Button" parent="Shop"]
+offset_left = 41.0
+offset_top = 38.0
+offset_right = 173.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Close"
+
+[node name="add_life" type="Button" parent="Shop"]
+offset_left = 295.0
+offset_top = 44.0
+offset_right = 464.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "+1 Life"
+
+[node name="add_life_price" type="Label" parent="Shop"]
+offset_left = 476.0
+offset_top = 51.0
+offset_right = 667.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "10 Coins"
+
+[node name="Not_enough" type="Label" parent="Shop"]
+visible = false
+offset_left = 305.0
+offset_top = 114.0
+offset_right = 1265.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0.912271, 1.70864e-06, 3.85046e-07, 1)
+theme_override_fonts/font = ExtResource("4_37w4s")
+theme_override_font_sizes/font_size = 30
+text = "You dont have enough coins for that!"
+
+[node name="success" type="Label" parent="Shop"]
+visible = false
+offset_left = 302.0
+offset_top = 102.0
+offset_right = 797.0
+offset_bottom = 133.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Purchase successfull
 "

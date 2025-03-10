@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4s5oy2p4n4yl"]
+[gd_scene load_steps=12 format=3 uid="uid://b4s5oy2p4n4yl"]
 
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_1s4xp"]
 [ext_resource type="Texture2D" uid="uid://bwcpf453dkt3i" path="res://assets/sprites/piskel_bat.png" id="2_qt8dl"]
+[ext_resource type="PackedScene" uid="uid://f5547opd1sm3" path="res://scenes/enemy_collision.tscn" id="3_82a52"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8qts"]
 atlas = ExtResource("2_qt8dl")
@@ -50,25 +51,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 15.0
+"speed": 20.0
 }]
 
-[sub_resource type="Curve2D" id="Curve2D_r5176"]
-_data = {
-"points": PackedVector2Array(0, 0, 5, 0, 5, 0, 10, 0, 20, 0, 5, 0, 0, 0, 0, 0, 20, 0)
-}
-point_count = 3
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6uvp"]
+radius = 5.0
 
 [node name="Bat" type="Node2D"]
 script = ExtResource("1_1s4xp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v7bjd")
-frame_progress = 0.525183
+autoplay = "default"
+frame_progress = 0.396054
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_r5176")
+[node name="Enemy_Collision" parent="." instance=ExtResource("3_82a52")]
+position = Vector2(0, -1)
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(4.78348, 0)
-rotation = 1.5708
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_Collision"]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_h6uvp")

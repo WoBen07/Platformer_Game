@@ -9,7 +9,7 @@ func _ready():
 	# Connect buttons to functions
 	restart_button.connect("pressed", _on_restart_pressed)
 	main_menu_button.connect("pressed", _on_main_menu_pressed)
-	info.text = "You died %d times and collected %d coins" % [LevelManager.deaths, LevelManager.collected_coins]
+	info.text = "You died %d times and collected %d coins" % [LevelManager.deaths, LevelManager.coin_checkpoint]
 
 func _on_restart_pressed():
 	print("Restarting level...")

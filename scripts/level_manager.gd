@@ -42,12 +42,12 @@ func load_main_menue():
 	game.add_child(main_menue_instance)
 	
 func load_restart_menu():
-	collected_coins = coin_checkpoint
+	collected_coins = 0
 	for child in game.get_children():
 		if child != endscreen:
 			game.remove_child(child)
 			child.queue_free()
-		await  get_tree().process_frame
+		await get_tree().process_frame
 		
 	var endscreen_instance = endscreen.instantiate()
 	
@@ -58,7 +58,8 @@ func reload_current_level():
 	
 	
 func instantiate_level(level_index):
-	coin_checkpoint = collected_coins
+	coin_checkpoint += collected_coins
+	collected_coins = 0
 	if level_index < 0 or level_index >= levels.size():
 		print("Invalid level index:", level_index)
 		return
@@ -102,8 +103,11 @@ func next_level():
 
 	if current_level >= levels.size():
 		print("Game finished")
+		print(current_level)
 		current_level -= 1
+		coin_checkpoint += collected_coins
 		load_restart_menu()
+		return
 	
 	instantiate_level(current_level)
 	

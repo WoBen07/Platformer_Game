@@ -15,6 +15,7 @@ signal health_changed(lives)
 var is_dead = false
 var is_loading_next_level = false
 var lives = 3
+var max_lives = 3
 var is_invincable = false
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0

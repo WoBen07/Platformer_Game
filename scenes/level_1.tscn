@@ -379,7 +379,16 @@ tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD+/wIAAAAAAAA
 tile_set = SubResource("TileSet_exo47")
 
 [node name="Bat" parent="." instance=ExtResource("12_1l0at")]
-position = Vector2(262, -11)
+position = Vector2(262, -42)
+
+[node name="Bat2" parent="." instance=ExtResource("12_1l0at")]
+position = Vector2(501, -9)
+
+[node name="Coin" parent="." instance=ExtResource("4_m7oa0")]
+position = Vector2(51, -69)
+
+[node name="Coin2" parent="." instance=ExtResource("4_m7oa0")]
+position = Vector2(99, 20)
 
 [connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
 [connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]

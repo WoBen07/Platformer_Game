@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bn3yr7t4vocmm"]
+[gd_scene load_steps=25 format=4 uid="uid://bn3yr7t4vocmm"]
 
 [ext_resource type="PackedScene" uid="uid://ckurrpdg7nb2w" path="res://scenes/player.tscn" id="1_pxk52"]
 [ext_resource type="Texture2D" uid="uid://bayq18dtklmq1" path="res://assets/sprites/world_tileset.png" id="2_ptv65"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/music.gd" id="7_yh7fh"]
 [ext_resource type="PackedScene" uid="uid://du6w2r68sicpw" path="res://scenes/coin.tscn" id="8_lmm8f"]
 [ext_resource type="Texture2D" uid="uid://dt88g3xmo0smp" path="res://assets/images/clouds.jpg" id="9_4vsj6"]
+[ext_resource type="PackedScene" uid="uid://b4s5oy2p4n4yl" path="res://scenes/bat.tscn" id="12_fopjb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ncb4t"]
 distance = -104.0
@@ -413,6 +414,21 @@ position = Vector2(482, -53)
 
 [node name="Coin6" parent="Coins" instance=ExtResource("8_lmm8f")]
 position = Vector2(529, -23)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("8_lmm8f")]
+position = Vector2(34, 10)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("8_lmm8f")]
+position = Vector2(81, 41)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("8_lmm8f")]
+position = Vector2(386, 9)
+
+[node name="Bat" parent="Coins" instance=ExtResource("12_fopjb")]
+position = Vector2(204, -55)
+
+[node name="Bat2" parent="Coins" instance=ExtResource("12_fopjb")]
+position = Vector2(344, -102)
 
 [connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
 [connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]
