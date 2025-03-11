@@ -63,7 +63,7 @@ script = ExtResource("1_1s4xp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v7bjd")
 autoplay = "default"
-frame_progress = 0.396054
+frame_progress = 0.431038
 
 [node name="Enemy_Collision" parent="." instance=ExtResource("3_82a52")]
 position = Vector2(0, -1)

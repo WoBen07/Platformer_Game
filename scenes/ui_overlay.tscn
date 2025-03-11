@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dshsb58bb81ev"]
+[gd_scene load_steps=44 format=3 uid="uid://dshsb58bb81ev"]
 
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="1_3xl2q"]
 [ext_resource type="Texture2D" uid="uid://bn32xgww70aai" path="res://assets/sprites/heart.png" id="1_dh0hy"]
@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://jm02oorscf6g" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_37w4s"]
 [ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="5_cgrhy"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="5_w5gvl"]
+[ext_resource type="Texture2D" uid="uid://cyxnl0ss4h8m" path="res://assets/icons/heart.png" id="7_knfxj"]
+[ext_resource type="Texture2D" uid="uid://dtg62tivpqn2p" path="res://assets/icons/coin.png" id="8_5nevt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mm6b7"]
 atlas = ExtResource("1_dh0hy")
@@ -288,7 +290,7 @@ position = Vector2(1671, 80)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_yr5n7")
 autoplay = "default"
-frame_progress = 0.508138
+frame_progress = 0.152466
 
 [node name="coins_bank" type="Label" parent="Control"]
 layout_mode = 0
@@ -327,7 +329,7 @@ text = "Shop"
 [node name="Shop" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="TextureRect" type="TextureRect" parent="Shop"]
+[node name="Background" type="TextureRect" parent="Shop"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -345,30 +347,32 @@ theme_override_font_sizes/font_size = 30
 text = "Close"
 
 [node name="add_life" type="Button" parent="Shop"]
-offset_left = 295.0
-offset_top = 44.0
-offset_right = 464.0
-offset_bottom = 83.0
+z_index = 10
+offset_left = 344.0
+offset_top = 113.0
+offset_right = 405.0
+offset_bottom = 152.0
 theme_override_fonts/font = ExtResource("5_cgrhy")
 theme_override_font_sizes/font_size = 30
-text = "+1 Life"
+text = "+1"
+expand_icon = true
 
 [node name="add_life_price" type="Label" parent="Shop"]
-offset_left = 476.0
-offset_top = 51.0
-offset_right = 667.0
-offset_bottom = 82.0
+offset_left = 452.0
+offset_top = 50.0
+offset_right = 512.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_cgrhy")
 theme_override_font_sizes/font_size = 30
-text = "10 Coins"
+text = "10"
 
 [node name="Not_enough" type="Label" parent="Shop"]
 visible = false
-offset_left = 305.0
-offset_top = 114.0
-offset_right = 1265.0
-offset_bottom = 145.0
+offset_left = 229.0
+offset_top = 416.0
+offset_right = 1189.0
+offset_bottom = 447.0
 theme_override_colors/font_color = Color(0.912271, 1.70864e-06, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_37w4s")
 theme_override_font_sizes/font_size = 30
@@ -376,12 +380,47 @@ text = "You dont have enough coins for that!"
 
 [node name="success" type="Label" parent="Shop"]
 visible = false
-offset_left = 302.0
-offset_top = 102.0
-offset_right = 797.0
-offset_bottom = 133.0
+offset_left = 497.0
+offset_top = 426.0
+offset_right = 992.0
+offset_bottom = 457.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("5_cgrhy")
 theme_override_font_sizes/font_size = 30
 text = "Purchase successfull
 "
+
+[node name="Heart" type="TextureRect" parent="Shop"]
+offset_left = 321.0
+offset_top = 16.0
+offset_right = 441.0
+offset_bottom = 136.0
+texture = ExtResource("7_knfxj")
+
+[node name="Coin" type="TextureRect" parent="Shop"]
+offset_left = 499.0
+offset_top = 45.0
+offset_right = 539.0
+offset_bottom = 85.0
+texture = ExtResource("8_5nevt")
+
+[node name="Maximum_amount" type="Label" parent="Shop"]
+visible = false
+offset_left = 172.0
+offset_top = 408.0
+offset_right = 1320.0
+offset_bottom = 439.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "You already bought the maximum amount possible!"
+
+[node name="max_heart_label" type="Label" parent="Shop"]
+offset_left = 461.0
+offset_top = 83.0
+offset_right = 509.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 20
+text = "1/1"

@@ -14,6 +14,7 @@ var current_level = 0
 var collected_coins = 0
 var coin_checkpoint = 0
 var deaths = 0
+var is_frozen = false
 @onready var game = get_tree().root.get_child(0)
 
 func _ready():

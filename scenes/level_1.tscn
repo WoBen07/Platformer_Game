@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://daproefgxreo8"]
+[gd_scene load_steps=20 format=4 uid="uid://daproefgxreo8"]
 
 [ext_resource type="PackedScene" uid="uid://ckurrpdg7nb2w" path="res://scenes/player.tscn" id="1_hee2x"]
 [ext_resource type="Texture2D" uid="uid://dt88g3xmo0smp" path="res://assets/images/clouds.jpg" id="1_oaxba"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cvg8y168rerqa" path="res://assets/music/forest_back.mp3" id="9_d2jqq"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="10_k2ki6"]
 [ext_resource type="PackedScene" uid="uid://b4s5oy2p4n4yl" path="res://scenes/bat.tscn" id="12_1l0at"]
+[ext_resource type="PackedScene" uid="uid://co8ty4n6k0c1p" path="res://scenes/frezze_potion.tscn" id="13_vlqd3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ff5pb"]
 distance = -104.0
@@ -389,6 +390,9 @@ position = Vector2(51, -69)
 
 [node name="Coin2" parent="." instance=ExtResource("4_m7oa0")]
 position = Vector2(99, 20)
+
+[node name="Frezze_Potion" parent="." instance=ExtResource("13_vlqd3")]
+position = Vector2(141, 26)
 
 [connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
 [connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]

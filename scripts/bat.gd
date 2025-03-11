@@ -9,6 +9,10 @@ func _ready():
 	start_position = position.x
 
 func _physics_process(delta):
+	if LevelManager.is_frozen:
+		speed = 10
+	else:
+		speed = 50
 	position.x += direction * speed * delta
 	
 	if (position.x >= start_position + walking_distance):

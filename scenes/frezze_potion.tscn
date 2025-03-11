@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://co8ty4n6k0c1p"]
+
+[ext_resource type="Script" path="res://scripts/frezze_potion.gd" id="1_fyhb3"]
+[ext_resource type="Texture2D" uid="uid://df26b15b5x4ux" path="res://assets/sprites/freeze_potion.png" id="2_7uwtu"]
+[ext_resource type="AudioStream" uid="uid://qofhjx7p1k52" path="res://assets/sounds/glass_breaking.wav" id="3_iexgo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_notop"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oop8o"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxbj2"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kitbk"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id1kw"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hick3"]
+atlas = ExtResource("2_7uwtu")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_exx8e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_notop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oop8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxbj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kitbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id1kw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hick3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0nuq"]
+size = Vector2(20, 26)
+
+[sub_resource type="Gradient" id="Gradient_8a402"]
+colors = PackedColorArray(0.333333, 0.537255, 1, 0.156863, 0.333333, 0.537255, 1, 0.156863)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3x30r"]
+gradient = SubResource("Gradient_8a402")
+
+[sub_resource type="Gradient" id="Gradient_wslqo"]
+colors = PackedColorArray(0.172549, 0.403922, 1, 0.470588, 0.85098, 1, 0.996078, 0.101961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_amqsw"]
+gradient = SubResource("Gradient_wslqo")
+fill_from = Vector2(0.518182, 1)
+fill_to = Vector2(0.518182, 0)
+
+[node name="Frezze_Potion" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_mask = 2
+script = ExtResource("1_fyhb3")
+
+[node name="Splash" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_exx8e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v0nuq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_iexgo")
+
+[node name="FrozenOverlay" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Background" type="TextureRect" parent="FrozenOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_3x30r")
+
+[node name="FreezeOverlay" type="TextureRect" parent="FrozenOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_amqsw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="animation_finished" from="Splash" to="." method="_on_splash_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

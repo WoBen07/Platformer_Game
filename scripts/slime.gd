@@ -1,6 +1,6 @@
 extends Node2D
 
-const speed = 60
+var speed = 60
 
 var direction = 1
 
@@ -10,6 +10,10 @@ var direction = 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if LevelManager.is_frozen:
+		speed = 20
+	else:
+		speed = 60
 	if ray_cast_right.is_colliding():
 		direction = -1
 		animated_sprite.flip_h = true

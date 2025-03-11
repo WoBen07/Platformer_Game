@@ -7,6 +7,8 @@ extends Container
 @onready var heart_4: AnimatedSprite2D = $"../Control/HeartContainer/Heart4"
 @onready var not_enough: Label = $"../Shop/Not_enough"
 @onready var success: Label = $"../Shop/success"
+@onready var maximum_amount: Label = $"../Shop/Maximum_amount"
+@onready var max_heart_label: Label = $"../Shop/max_heart_label"
 
 var clicked_before = false
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +19,7 @@ func _ready() -> void:
 
 func _on_add_life_pressed():
 	if clicked_before:
+		max_heart_label.visible = true
 		return
 	if LevelManager.coin_checkpoint >= 10:
 		LevelManager.coin_checkpoint -= 10
@@ -25,8 +28,10 @@ func _on_add_life_pressed():
 		Globals.player.lives += 1
 		Globals.player.max_lives += 1
 		success.visible = true
+		maximum_amount.text = "0/1"
 	else:
 		not_enough.visible = true
+	
 		
 func _on_shop_pressed():
 	print("Shop pressed")
@@ -36,6 +41,7 @@ func _on_close_pressed():
 	shop.visible = false
 	not_enough.visible= false
 	success.visible = false
+	max_heart_label.visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
