@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://hq50atpt3077"]
+[gd_scene load_steps=9 format=3 uid="uid://hq50atpt3077"]
 
 [ext_resource type="Texture2D" uid="uid://b3abklvplyxig" path="res://assets/images/main_menu_background.jpg" id="1_khtum"]
 [ext_resource type="Script" path="res://scripts/main_menue.gd" id="1_x2464"]
 [ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="2_igpxk"]
 [ext_resource type="AudioStream" uid="uid://n0a6gfjwtkim" path="res://assets/music/time_for_adventure.mp3" id="4_kwxuw"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="5_y20bl"]
+[ext_resource type="Texture2D" uid="uid://brasj4qdwwfgt" path="res://assets/images/level_selector.jpg" id="6_d6cra"]
+[ext_resource type="Texture2D" uid="uid://q0awjbpmnjel" path="res://assets/sprites/level_button_normal.png" id="7_a272o"]
+[ext_resource type="Texture2D" uid="uid://bh442ktf5bx2u" path="res://assets/sprites/level_button_pressed.png" id="8_tsahv"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -40,25 +43,128 @@ theme_override_fonts/font = ExtResource("2_igpxk")
 theme_override_font_sizes/font_size = 150
 text = "Main Menu"
 
-[node name="Play" type="Button" parent="CanvasLayer"]
+[node name="Container" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -126.0
+offset_left = -309.5
 offset_top = -42.0
-offset_right = 126.0
+offset_right = 309.5
 offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Container"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_igpxk")
 theme_override_font_sizes/font_size = 75
 text = "Play"
 
+[node name="LevelSelector" type="Button" parent="CanvasLayer/Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 75
+text = "Level"
+
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_kwxuw")
 script = ExtResource("5_y20bl")
+
+[node name="LevelSelector" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelector"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_d6cra")
+expand_mode = 1
+
+[node name="Close" type="Button" parent="LevelSelector"]
+offset_left = 63.0
+offset_top = 59.0
+offset_right = 277.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 50
+text = "Close"
+
+[node name="Level_Button_1" type="TextureButton" parent="LevelSelector"]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 522.0
+offset_top = 432.0
+offset_right = 622.0
+offset_bottom = 532.0
+texture_normal = ExtResource("7_a272o")
+texture_pressed = ExtResource("8_tsahv")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="LevelSelector/Level_Button_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="Level_Button_2" type="TextureButton" parent="LevelSelector"]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 652.0
+offset_top = 432.0
+offset_right = 752.0
+offset_bottom = 532.0
+texture_normal = ExtResource("7_a272o")
+texture_pressed = ExtResource("8_tsahv")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="LevelSelector/Level_Button_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 30
+text = "2"
+
+[node name="Success" type="Label" parent="LevelSelector"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.5
+offset_top = 250.0
+offset_right = 324.5
+offset_bottom = 281.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 30
+text = "Level selected successfully"
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="tree_exited" from="Music" to="." method="_on_music_tree_exited"]

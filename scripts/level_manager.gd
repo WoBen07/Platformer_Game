@@ -21,12 +21,13 @@ func _ready():
 	print("LevelManager Ready")  # Debugging Line
 	#var main_menue_instance = main_menu.instantiate()
 	#game.add_child(main_menue_instance)
+	current_level = 0
 	load_main_menue()
  # Ensures the first level is loaded only once
 
 func load_main_menue():
 	# Ensure current_level is reset
-	current_level = 0  
+
 	deaths = 0
 	collected_coins = 0
 	coin_checkpoint = 0
