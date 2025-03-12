@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dshsb58bb81ev"]
+[gd_scene load_steps=45 format=3 uid="uid://dshsb58bb81ev"]
 
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="1_3xl2q"]
 [ext_resource type="Texture2D" uid="uid://bn32xgww70aai" path="res://assets/sprites/heart.png" id="1_dh0hy"]
@@ -251,6 +251,14 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qjv7i"]
 gradient = SubResource("Gradient_qvw3p")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpjih"]
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.278431, 0.278431, 0.278431, 0.356863)
+
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
@@ -312,6 +320,15 @@ offset_bottom = 167.0
 scale = Vector2(2.94918, 2.66993)
 theme_override_fonts/font = ExtResource("4_37w4s")
 text = "+ X"
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 206.0
+offset_top = 32.0
+offset_right = 327.0
+offset_bottom = 71.0
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Menu"
 
 [node name="Container" type="Container" parent="."]
 offset_left = 39.0
@@ -424,3 +441,49 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_cgrhy")
 theme_override_font_sizes/font_size = 20
 text = "1/1"
+
+[node name="Menu2" type="Popup" parent="."]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(400, 600)
+always_on_top = true
+transparent = true
+
+[node name="Panel" type="Panel" parent="Menu2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lpjih")
+
+[node name="Main_menu" type="Button" parent="Menu2/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.5
+offset_top = 200.0
+offset_right = 120.5
+offset_bottom = 239.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="close" type="Button" parent="Menu2/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -100.0
+offset_right = 66.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_cgrhy")
+theme_override_font_sizes/font_size = 30
+text = "Close"

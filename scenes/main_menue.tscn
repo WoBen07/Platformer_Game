@@ -76,6 +76,7 @@ stream = ExtResource("4_kwxuw")
 script = ExtResource("5_y20bl")
 
 [node name="LevelSelector" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="LevelSelector"]
 anchors_preset = 15
