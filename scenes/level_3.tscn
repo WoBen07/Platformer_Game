@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dw2w1duhy4ni5"]
+[gd_scene load_steps=29 format=4 uid="uid://dw2w1duhy4ni5"]
 
 [ext_resource type="Texture2D" uid="uid://dt88g3xmo0smp" path="res://assets/images/clouds.jpg" id="1_umkn8"]
 [ext_resource type="PackedScene" uid="uid://ckurrpdg7nb2w" path="res://scenes/player.tscn" id="2_cd3qq"]
@@ -8,8 +8,11 @@
 [ext_resource type="AudioStream" uid="uid://cvg8y168rerqa" path="res://assets/music/forest_back.mp3" id="6_dtiv3"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="7_6q5ue"]
 [ext_resource type="PackedScene" uid="uid://cm4q7510hgnmv" path="res://scenes/slime.tscn" id="8_ew2mh"]
+[ext_resource type="PackedScene" uid="uid://b4s5oy2p4n4yl" path="res://scenes/bat.tscn" id="9_o76gm"]
 [ext_resource type="FontFile" uid="uid://bbfohdspakrm" path="res://assets/fonts/PixelOperator8.ttf" id="10_c8ngw"]
 [ext_resource type="PackedScene" uid="uid://cggqa7n1fb3mw" path="res://scenes/platform.tscn" id="11_l7nve"]
+[ext_resource type="PackedScene" uid="uid://co8ty4n6k0c1p" path="res://scenes/frezze_potion.tscn" id="12_16f4p"]
+[ext_resource type="PackedScene" uid="uid://du6w2r68sicpw" path="res://scenes/coin.tscn" id="12_inds4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ncb4t"]
 distance = -104.0
@@ -198,6 +201,45 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ypfl7"]
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1.36667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(107, -89), Vector2(169, -90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odca8"]
+_data = {
+"RESET": SubResource("Animation_ypfl7"),
+"move": SubResource("Animation_x7dev")
+}
+
+[sub_resource type="Animation" id="Animation_cigxf"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(234, -90), Vector2(331, -89)]
+}
+
+[sub_resource type="Animation" id="Animation_2y6de"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -209,13 +251,88 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(378, 6)]
+"values": [Vector2(234, -90)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_odca8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yoc06"]
 _data = {
-"RESET": SubResource("Animation_ypfl7"),
-"move": SubResource("Animation_x7dev")
+"RESET": SubResource("Animation_2y6de"),
+"move": SubResource("Animation_cigxf")
+}
+
+[sub_resource type="Animation" id="Animation_wth50"]
+resource_name = "move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(458, -89), Vector2(394, -90)]
+}
+
+[sub_resource type="Animation" id="Animation_78gbr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(458, -89)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fykw2"]
+_data = {
+"RESET": SubResource("Animation_78gbr"),
+"move": SubResource("Animation_wth50")
+}
+
+[sub_resource type="Animation" id="Animation_b8i27"]
+resource_name = "move"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2.93333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(394, 55), Vector2(362, 54)]
+}
+
+[sub_resource type="Animation" id="Animation_qwss7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(394, 55)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7eoj"]
+_data = {
+"RESET": SubResource("Animation_qwss7"),
+"move": SubResource("Animation_b8i27")
 }
 
 [node name="Level_2" type="Node"]
@@ -260,7 +377,7 @@ tile_set = SubResource("TileSet_oj8sm")
 [node name="Mid" type="TileMapLayer" parent="Map"]
 use_parent_material = true
 position = Vector2(59, 34)
-tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAEAAAACAAEAAAAAAAAAAAADAAEAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAEAAAAHAAIAAAAAAAAAAAADAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAEAAAAQAAIAAAAAAAEAAAARAAEAAAAAAAAAAAARAAIAAAAAAAEAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAKAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAARAP7/AAAAAAAAAAASAP7/AAAAAAAAAAAWAAEAAAAAAAAAAAAXAAEAAAAAAAAAAAAaAP7/AAAAAAAAAAAbAP7/AAAAAAAAAAAeAPz/AAAAAAAAAAAfAPz/AAAAAAAAAAAhAPv/AAAAAAAAAAAiAPv/AAAAAAAAAAAgAPz/AAAAAAEAAAAhAPz/AAAAAAEAAAAiAPz/AAAAAAEAAAAbAPj/AAAAAAAAAAAaAPj/AAAAAAAAAAAaAPn/AAAAAAEAAAAbAPn/AAAAAAEAAAATAPn/AAAAAAEAAAASAPn/AAAAAAEAAAASAPj/AAAAAAAAAAATAPj/AAAAAAAAAAAJAPn/AAAAAAEAAAAIAPn/AAAAAAEAAAAJAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAAAPj/AAAAAAAAAAABAPj/AAAAAAAAAAAAAPn/AAAAAAEAAAABAPn/AAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAEAAAACAAEAAAAAAAAAAAADAAEAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAEAAAAHAAIAAAAAAAAAAAADAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAEAAAAQAAIAAAAAAAEAAAARAAEAAAAAAAAAAAARAAIAAAAAAAEAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAKAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAARAP7/AAAAAAAAAAASAP7/AAAAAAAAAAAWAAEAAAAAAAAAAAAXAAEAAAAAAAAAAAAaAP7/AAAAAAAAAAAbAP7/AAAAAAAAAAAeAPz/AAAAAAAAAAAfAPz/AAAAAAAAAAAhAPv/AAAAAAAAAAAiAPv/AAAAAAAAAAAgAPz/AAAAAAEAAAAhAPz/AAAAAAEAAAAiAPz/AAAAAAEAAAAbAPj/AAAAAAAAAAAaAPj/AAAAAAAAAAAaAPn/AAAAAAEAAAAbAPn/AAAAAAEAAAATAPn/AAAAAAEAAAASAPn/AAAAAAEAAAASAPj/AAAAAAAAAAATAPj/AAAAAAAAAAAJAPn/AAAAAAEAAAAIAPn/AAAAAAEAAAAJAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAAAPj/AAAAAAAAAAABAPj/AAAAAAAAAAAAAPn/AAAAAAEAAAABAPn/AAAAAAEAAAAeAPn/AAAAAAAAAAAfAPn/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_oj8sm")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Map"]
@@ -270,6 +387,12 @@ script = ExtResource("7_6q5ue")
 [node name="Endmarker" parent="Map" instance=ExtResource("4_tjlqj")]
 position = Vector2(76, -106)
 
+[node name="Frezze_Potion" parent="Map" instance=ExtResource("12_16f4p")]
+position = Vector2(546, -84)
+
+[node name="Frezze_Potion2" parent="Map" instance=ExtResource("12_16f4p")]
+position = Vector2(228, -5)
+
 [node name="Enemys" type="Node" parent="."]
 
 [node name="Slime" parent="Enemys" instance=ExtResource("8_ew2mh")]
@@ -277,6 +400,24 @@ position = Vector2(181, 53)
 
 [node name="Slime2" parent="Enemys" instance=ExtResource("8_ew2mh")]
 position = Vector2(284, 53)
+
+[node name="Bat" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(156, -11)
+
+[node name="Bat2" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(283, -10)
+
+[node name="Bat3" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(427, -11)
+
+[node name="Bat4" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(175, -106)
+
+[node name="Bat5" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(341, -108)
+
+[node name="Bat6" parent="Enemys" instance=ExtResource("9_o76gm")]
+position = Vector2(503, -108)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -140.0
@@ -290,7 +431,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Platforms" type="Node" parent="."]
 
 [node name="Platform" parent="Platforms" instance=ExtResource("11_l7nve")]
-position = Vector2(378, 6)
+position = Vector2(107, -89)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform"]
 libraries = {
@@ -298,7 +439,73 @@ libraries = {
 }
 autoplay = "move"
 
+[node name="Platform5" parent="Platforms" instance=ExtResource("11_l7nve")]
+position = Vector2(107, -89)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform5"]
+libraries = {
+"": SubResource("AnimationLibrary_odca8")
+}
+autoplay = "RESET"
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("11_l7nve")]
+position = Vector2(234, -90)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform2"]
+libraries = {
+"": SubResource("AnimationLibrary_yoc06")
+}
+autoplay = "move"
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("11_l7nve")]
+position = Vector2(458, -89)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform3"]
+libraries = {
+"": SubResource("AnimationLibrary_fykw2")
+}
+autoplay = "move"
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("11_l7nve")]
+position = Vector2(394, 55)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform4"]
+libraries = {
+"": SubResource("AnimationLibrary_u7eoj")
+}
+autoplay = "move"
+
 [node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(166, -4)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(214, -5)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(294, -5)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(340, -5)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(434, 43)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(501, -5)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(550, -37)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(434, -99)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(288, -102)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("12_inds4")]
+position = Vector2(141, -101)
 
 [connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
 [connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]
