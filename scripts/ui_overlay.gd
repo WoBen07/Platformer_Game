@@ -10,6 +10,12 @@ extends Control
 @onready var menu_2: Popup = $"../Menu2"
 @onready var close: Button = $"../Menu2/Panel/close"
 @onready var main_menu: Button = $"../Menu2/Panel/Main_menu"
+@onready var save: Button = $"../Menu2/Panel/Save"
+@onready var load: Button = $"../Menu2/Panel/Load"
+@onready var success: Label = $"../Menu2/Panel/success"
+@onready var load_dialoge: Panel = $"../Menu2/Panel/Load_Dialoge"
+@onready var yes_load: Button = $"../Menu2/Panel/Load_Dialoge/yes_load"
+@onready var no_load: Button = $"../Menu2/Panel/Load_Dialoge/no_load"
 
 
 
@@ -22,12 +28,32 @@ func _ready() -> void:
 	menu.connect("pressed", _on_menu_pressed)
 	close.connect("pressed", _on_close_pressed)
 	main_menu.connect("pressed", _on_main_menu_pressed)
+	save.connect("pressed", _on_safe_pressed)
+	load.connect("pressed", _on_load_pressed)
+	yes_load.connect("pressed", _on_yes_load_pressed)
+	no_load.connect("pressed", _on_no_load_pressed)
+	
+func _on_no_load_pressed():
+	load_dialoge.visible = false
+	
+func _on_yes_load_pressed():
+	LevelManager.load_game()
+	LevelManager.reload_current_level()
+
+func _on_load_pressed():
+	load_dialoge.visible = true
+	
+func _on_safe_pressed():
+	success.visible = true
+	LevelManager.save_game()
 	
 func _on_menu_pressed():
 	menu_2.visible = true
 	
 func _on_close_pressed():
 	menu_2.visible = false
+	success.visible = false
+	load_dialoge.visible = false
 	
 func _on_main_menu_pressed():
 	LevelManager.load_main_menue()

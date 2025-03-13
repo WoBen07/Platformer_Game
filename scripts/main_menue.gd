@@ -8,6 +8,8 @@ extends Control
 @onready var level_button_1: TextureButton = $LevelSelector/Level_Button_1
 @onready var level_button_2: TextureButton = $LevelSelector/Level_Button_2
 @onready var success: Label = $LevelSelector/Success
+@onready var load: Button = $CanvasLayer/Container/Load
+@onready var success_load: Label = $CanvasLayer/Success
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +18,12 @@ func _ready() -> void:
 	close.connect("pressed", _on_close_pressed)
 	level_button_1.connect("pressed", _on_level_1_pressed)
 	level_button_2.connect("pressed", _on_level_2_pressed)
+	load.connect("pressed", _on_load_pressed)
+	
+	
+func _on_load_pressed():
+	LevelManager.load_game()
+	success_load.visible = true
 	
 func _on_level_1_pressed():
 	LevelManager.current_level = 0

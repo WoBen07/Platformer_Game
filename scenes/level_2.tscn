@@ -347,13 +347,19 @@ tile_set = SubResource("TileSet_oj8sm")
 stream = ExtResource("6_0ki1c")
 script = ExtResource("7_yh7fh")
 
-[node name="Slimes" type="Node" parent="."]
+[node name="Enemys" type="Node" parent="."]
 
-[node name="Slime" parent="Slimes" instance=ExtResource("4_7uetj")]
+[node name="Slime" parent="Enemys" instance=ExtResource("4_7uetj")]
 position = Vector2(113, 36)
 
-[node name="Slime2" parent="Slimes" instance=ExtResource("4_7uetj")]
+[node name="Slime2" parent="Enemys" instance=ExtResource("4_7uetj")]
 position = Vector2(435, -43)
+
+[node name="Bat" parent="Enemys" instance=ExtResource("12_fopjb")]
+position = Vector2(204, -55)
+
+[node name="Bat2" parent="Enemys" instance=ExtResource("12_fopjb")]
+position = Vector2(344, -102)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -140.0
@@ -362,6 +368,7 @@ offset_right = -52.0
 offset_bottom = -29.0
 theme_override_fonts/font = ExtResource("7_5f5kk")
 text = "Level 2"
+metadata/_edit_use_anchors_ = true
 
 [node name="Platforms" type="Node" parent="."]
 
@@ -423,12 +430,6 @@ position = Vector2(81, 41)
 
 [node name="Coin9" parent="Coins" instance=ExtResource("8_lmm8f")]
 position = Vector2(386, 9)
-
-[node name="Bat" parent="Coins" instance=ExtResource("12_fopjb")]
-position = Vector2(204, -55)
-
-[node name="Bat2" parent="Coins" instance=ExtResource("12_fopjb")]
-position = Vector2(344, -102)
 
 [connection signal="tree_exited" from="Map/Music" to="Map/Music" method="_on_tree_exited"]
 [connection signal="tree_exiting" from="Map/Music" to="Map/Music" method="_on_tree_exiting"]

@@ -2,12 +2,14 @@ extends Node
 
 var levels = [
 	preload("res://scenes/level_1.tscn"),
-	preload("res://scenes/level_2.tscn")
+	preload("res://scenes/level_2.tscn"),
+	preload("res://scenes/level_3.tscn")
 ]
 
 var endscreen = preload("res://scenes/endscreen.tscn")
 var main_menu = preload("res://scenes/main_menue.tscn")
 const UI_OVERLAY = preload("res://scenes/ui_overlay.tscn")
+@onready var game = get_tree().root.get_child(0)
 
 var is_loading = false
 var current_level = 0
@@ -15,13 +17,42 @@ var collected_coins = 0
 var coin_checkpoint = 0
 var deaths = 0
 var is_frozen = false
-@onready var game = get_tree().root.get_child(0)
 
+
+func save_game():
+	var safe_data = {
+		"level": current_level,
+		"deaths": deaths,
+		"coins": coin_checkpoint
+	}
+	var File = FileAccess.open("res://savegame/savegame", FileAccess.WRITE)
+	File.store_string(JSON.stringify(safe_data, "\t"))
+	File.close()
+	print("Game saved")
+	
+func load_game():
+	var path = "res://savegame/savegame"
+	if not FileAccess.file_exists(path):
+		print("No Savegame FOund")
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	
+	var content = file.get_as_text()
+	file.close()
+	var safeData = JSON.parse_string(content)
+	
+	if safeData:
+		current_level = safeData.get("level", 0)
+		coin_checkpoint = safeData.get("coins", 0)
+		deaths = safeData.get("deaths", 0)
+	else:
+		print("No Safedata found")
+		
 func _ready():
 	print("LevelManager Ready")  # Debugging Line
 	#var main_menue_instance = main_menu.instantiate()
 	#game.add_child(main_menue_instance)
-	current_level = 0
+	current_level = 2
 	load_main_menue()
  # Ensures the first level is loaded only once
 

@@ -71,6 +71,23 @@ theme_override_fonts/font = ExtResource("2_igpxk")
 theme_override_font_sizes/font_size = 75
 text = "Level"
 
+[node name="Load" type="Button" parent="CanvasLayer/Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 75
+text = "Load"
+
+[node name="Success_load" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 314.0
+offset_top = 377.0
+offset_right = 1720.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(0, 0.839216, 0, 1)
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 75
+text = "Game loaded succesfully"
+
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_kwxuw")
 script = ExtResource("5_y20bl")
