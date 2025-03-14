@@ -22,10 +22,7 @@ const JUMP_VELOCITY = -300.0
 var controls_disabled = false
 
 func _ready():
-	var tween = get_tree().create_tween()
-	tween.set_loops()  # Repeat indefinitely
-	tween.tween_property(heart_container, "position:y", heart_container.position.y - 1.5, 0.5).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(heart_container, "position:y", heart_container.position.y + 1.5, 0.5).set_trans(Tween.TRANS_SINE)
+	
 	add_to_group("player")
 
 func respawn():

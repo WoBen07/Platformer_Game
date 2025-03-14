@@ -52,7 +52,7 @@ func _ready():
 	print("LevelManager Ready")  # Debugging Line
 	#var main_menue_instance = main_menu.instantiate()
 	#game.add_child(main_menue_instance)
-	current_level = 2
+	current_level = 0
 	load_main_menue()
  # Ensures the first level is loaded only once
 
