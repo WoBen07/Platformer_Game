@@ -83,7 +83,7 @@ sprite_frames = SubResource("SpriteFrames_exx8e")
 shape = SubResource("RectangleShape2D_v0nuq")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 6.0
 one_shot = true
 
 [node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
