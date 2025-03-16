@@ -35,6 +35,7 @@ func flip_direction():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 		print("body entered")
+		
 		animated_sprite.scale = original_scale * multiplier
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
