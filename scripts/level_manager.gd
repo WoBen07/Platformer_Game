@@ -17,13 +17,17 @@ var collected_coins = 0
 var coin_checkpoint = 0
 var deaths = 0
 var is_frozen = false
+var lives = 3
+var maxLives = 3
 
 
 func save_game():
 	var safe_data = {
 		"level": current_level,
 		"deaths": deaths,
-		"coins": coin_checkpoint
+		"coins": coin_checkpoint,
+		"lives": lives,
+		"maxLives": maxLives
 	}
 	var File = FileAccess.open("res://savegame/savegame", FileAccess.WRITE)
 	File.store_string(JSON.stringify(safe_data, "\t"))
@@ -45,6 +49,8 @@ func load_game():
 		current_level = safeData.get("level", 0)
 		coin_checkpoint = safeData.get("coins", 0)
 		deaths = safeData.get("deaths", 0)
+		lives = safeData.get("lives", 0)
+		maxLives = safeData.get("maxLives", 0)
 	else:
 		print("No Safedata found")
 		
@@ -62,6 +68,8 @@ func load_main_menue():
 	deaths = 0
 	collected_coins = 0
 	coin_checkpoint = 0
+	lives = 3
+	maxLives = 3
 	# Remove all children EXCEPT the main menu
 	for child in game.get_children():
 		if child != main_menu:  # Keep main menu
@@ -76,6 +84,7 @@ func load_main_menue():
 	
 func load_restart_menu():
 	collected_coins = 0
+	lives = maxLives
 	for child in game.get_children():
 		if child != endscreen:
 			game.remove_child(child)
@@ -93,6 +102,7 @@ func reload_current_level():
 func instantiate_level(level_index):
 	coin_checkpoint += collected_coins
 	collected_coins = 0
+	lives = maxLives
 	if level_index < 0 or level_index >= levels.size():
 		print("Invalid level index:", level_index)
 		return

@@ -25,10 +25,12 @@ func _on_add_life_pressed():
 		LevelManager.coin_checkpoint -= 10
 		clicked_before = true
 		heart_4.visible = true
-		Globals.player.lives += 1
-		Globals.player.max_lives += 1
+		LevelManager.lives += 1
+		LevelManager.maxLives += 1
 		success.visible = true
 		maximum_amount.text = "0/1"
+		print("Bought lives, max lives: ", LevelManager.maxLives)
+		print(LevelManager.lives)
 	else:
 		not_enough.visible = true
 	

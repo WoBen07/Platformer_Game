@@ -59,7 +59,7 @@ func _on_main_menu_pressed():
 	LevelManager.load_main_menue()
 	
 func _on_health_changed(lives):
-	if Globals.player.max_lives == 4:
+	if LevelManager.maxLives == 4:
 		if lives == 3:
 			heart_1.play()
 		elif lives == 2:

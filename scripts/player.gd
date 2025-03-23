@@ -14,20 +14,24 @@ signal health_changed(lives)
 
 var is_dead = false
 var is_loading_next_level = false
-var lives = 3
-var max_lives = 3
 var is_invincable = false
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 var controls_disabled = false
+
+func get_lives():
+	return LevelManager.lives
+
+func get_max_lives():
+	return LevelManager.maxLives
 
 func _ready():
 	
 	add_to_group("player")
 
 func respawn():
-	if lives > 0:
-		lives -= 1
+	if get_lives() > 0:
+		LevelManager.lives -= 1
 		global_position = spawn_point
 		update_lives()
 		make_invincable()
@@ -35,18 +39,13 @@ func respawn():
 		player_die()
 		
 func update_lives():
-	if lives == 2:
-		emit_signal("health_changed", lives)
-		#heart_1.play()
-		hit.play()
+	if get_lives() > 0:
+		emit_signal("health_changed", get_lives())
 		animated_sprite.play("hit")
-	elif lives == 1:
-		emit_signal("health_changed", lives)
-		#heart_2.play()
 		hit.play()
-		animated_sprite.play("hit")
+
 	else:
-		emit_signal("health_changed", lives)
+		emit_signal("health_changed", get_lives())
 		#heart_3.play()
 		animated_sprite.play("hit")
 		player_die()
@@ -63,7 +62,7 @@ func player_is_hit():
 	if is_dead or is_invincable:  
 		return  
 	is_invincable = true
-	lives -= 1
+	LevelManager.lives -= 1
 	update_lives()
 	if is_invincable:
 		make_invincable()

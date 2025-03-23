@@ -8,7 +8,7 @@ extends Area2D
 var frozen_effect_triggered = false
 
 func _process(delta: float) -> void:
-	if Globals.player.lives == 0 and LevelManager.is_frozen:
+	if LevelManager.lives == 0 and LevelManager.is_frozen:
 		_cancel_frezze_effect()
 func _on_body_entered(body: Node2D) -> void:
 	if frozen_effect_triggered:

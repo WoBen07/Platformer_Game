@@ -95,6 +95,21 @@ script = ExtResource("5_y20bl")
 [node name="LevelSelector" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="Success" type="Label" parent="LevelSelector"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -324.5
+offset_top = 250.0
+offset_right = 324.5
+offset_bottom = 281.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_igpxk")
+theme_override_font_sizes/font_size = 30
+text = "Level selected successfully"
+
 [node name="TextureRect" type="TextureRect" parent="LevelSelector"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,21 +183,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_igpxk")
 theme_override_font_sizes/font_size = 30
 text = "2"
-
-[node name="Success" type="Label" parent="LevelSelector"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -324.5
-offset_top = 250.0
-offset_right = 324.5
-offset_bottom = 281.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("2_igpxk")
-theme_override_font_sizes/font_size = 30
-text = "Level selected successfully"
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="tree_exited" from="Music" to="." method="_on_music_tree_exited"]
